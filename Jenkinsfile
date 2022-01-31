@@ -12,7 +12,7 @@ pipeline {
 		stage ('push repo to remote host') {
  			steps {
 				echo "connect to remote host and pull down the latest version"
-				sh '  ssh -i "Mailgateway.pem" ec2-user@ip-172-31-24-118.ap-southeast-1.compute.internal                                  sudo  git -C "/var/www/html/Jenkins" pull origin master'
+				sh '  ssh -i "/var/jenkins_home/workspace/Mailgateway.pem" ec2-user@ip-172-31-24-118.ap-southeast-1.compute.internal                                  sudo  git -C "/var/www/html/Jenkins" pull origin master'
 				}
 		}
 	
