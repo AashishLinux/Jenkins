@@ -19,7 +19,7 @@ pipeline {
 		stage ('check website is up') {
 			steps {
           			echo "check website is up"
- 				sh   'curl -is | head -n 1'
+ 				sh   'curl `ip a | grep eth0 | tail -n1 | cut -b 10-21`'
 				}
 		}
   	}
