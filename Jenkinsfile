@@ -16,20 +16,26 @@ pipeline {
                                 }
                 }
 
-                stage ('Checking Host is Alive') {
+                stage ('Checking If Host Is Alive') {
                         steps {
-                                echo "Trying to ping host"
-                                sh 'ping -c 2 ip-172-31-25-76.ap-southeast-1.compute.internal'
-                                echo "Ping done"
+                                echo "Checking If Host Is Alive"
+                                sh ' ssh -i "/var/jenkins_home/workspace/Mailgateway.pem" ec2-user@ip-172-31-25-76.ap-southeast-1.compute.internal                                 sudo  ping -c2 172.31.25.76'
+                                echo "Ping Done And Host Is Reachable"
+                                }
+                }
+                stage ('Curling Site Data ') {
+                        steps {
+                                echo "Curling Site Data"
+                                sh 'curl 172.31.25.76'
+                                echo "Curling Done"
                                 }
                 }
 
-                stage ('Checking Website Content Data') {
+                stage ('Removing Residue') {
                         steps {
-                                echo "check website is up"
-                                sh   'a=$(curl ipconfig.io)'
-                                sh   'curl $a'
-                                echo "Data have been updated and working"
+                                echo "Removing Residue"
+                                sh   'ssh -i "/var/jenkins_home/workspace/Mailgateway.pem" ec2-user@ip-172-31-25-76.ap-southeast-1.compute.internal                                 sudo  rm -rf /var/www/html/Jenkins/Jenkinsfile'
+                                echo "You are good to GO!!!!"
                                 }
                 }
         }
