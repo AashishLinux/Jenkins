@@ -1,7 +1,7 @@
 pipeline {
         agent any
         stages {
-                stage ('cloning REPO') {
+                stage ('Cloning Site Data') {
                         steps {
                                 echo "clone the repo"
                                 sh 'rm -rf Jenkins'
